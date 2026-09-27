@@ -16,7 +16,13 @@ class SafeCalculator:
         }
         self.functions = {
             'sqrt': math.sqrt,
-            'percent': lambda x: x / 100.0
+            'percent': lambda x: x / 100.0,
+            'sin': math.sin,
+            'cos': math.cos,
+            'tan': math.tan,
+            'log': math.log,
+            'log10': math.log10,
+            'exp': math.exp
         }
 
     def evaluate(self, expr: str) -> str:

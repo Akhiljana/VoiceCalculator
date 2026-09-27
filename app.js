@@ -132,6 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'decimal': '.',
         'equals': '=',
         'square root of': 'sqrt(',
+        'sine of': 'sin(',
+        'sine': 'sin(',
+        'cosine of': 'cos(',
+        'cosine': 'cos(',
+        'tangent of': 'tan(',
+        'tangent': 'tan(',
+        'logarithm of': 'log(',
         'percent of': '* 0.01 *',
         'percent': '* 0.01',
         'open parenthesis': '(',
@@ -154,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnStart.textContent = '⏳ PROCESSING...';
         let normalized = transcript.toLowerCase();
         
+        normalized = normalized.replace(/\bx\b/gi, '*');
+        normalized = normalized.replace(/(\d)\s*x\s*(\d)/gi, '$1 * $2');
+        
         // Multi-word replacements first
         for (const [word, op] of Object.entries(wordToMath)) {
             normalized = normalized.split(word).join(op);
@@ -171,12 +181,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         normalized = parsed.join(' ');
         
-        // Fix sqrt closing parens if used
-        if (normalized.includes('sqrt(')) {
-            normalized += ')';
+        // Fix closing parens if used
+        if (normalized.includes('sqrt(') || normalized.includes('sin(') || normalized.includes('cos(') || normalized.includes('tan(') || normalized.includes('log(')) {
+            if (!normalized.endsWith(')')) {
+                normalized += ')';
+            }
         }
-
-        normalized = normalized.replace(/[^0-9\+\-\*\/\.\(\)\s]/g, ''); // strip unknown chars just in case
+        
+        normalized = normalized.replace(/[^0-9\+\-\*\/\.\(\)\sA-Za-z]/g, ''); // strip unknown chars but leave letters for functions
 
         expressionDisplay.textContent = normalized;
         sendCalculation(normalized);
