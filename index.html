@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Calculator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎙️ Voice Calculator</h1>
+            <p>Speak your calculation and get the answer instantly.</p>
+            <div class="status-indicator">
+                <span id="server-status">● Server Checking...</span>
+                <span id="mic-status">Microphone Ready</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="calculator-card">
+                <div class="display">
+                    <div id="expression-display" class="expression"></div>
+                    <div id="result-display" class="result">0</div>
+                    <div id="error-display" class="error-msg"></div>
+                </div>
+
+                <div class="controls">
+                    <button id="btn-start" class="btn primary">🎙️ START LISTENING</button>
+                    <button id="btn-stop" class="btn secondary hidden">STOP</button>
+                    <button id="btn-clear" class="btn secondary">CLEAR</button>
+                </div>
+
+                <div class="fallback-input">
+                    <input type="text" id="keyboard-input" placeholder="Or type here (e.g. 25 + 10)">
+                    <button id="btn-calculate" class="btn secondary">Calculate</button>
+                </div>
+            </div>
+
+            <div class="history-card">
+                <div class="history-header">
+                    <h2>History</h2>
+                    <button id="btn-clear-history" class="btn small">Clear History</button>
+                </div>
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Expression</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <!-- History rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
