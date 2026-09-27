@@ -41,9 +41,9 @@ class SafeCalculator:
             raise ValueError("Invalid mathematical expression")
 
     def _eval(self, node):
-        if isinstance(node, ast.Num): # <python3.8
+        if hasattr(ast, 'Num') and isinstance(node, getattr(ast, 'Num')): # <python3.8
             return node.n
-        elif isinstance(node, ast.Constant): # python3.8+
+        elif hasattr(ast, 'Constant') and isinstance(node, getattr(ast, 'Constant')): # python3.8+
             return node.value
         elif isinstance(node, ast.BinOp):
             return self.operators[type(node.op)](self._eval(node.left), self._eval(node.right))

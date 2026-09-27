@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
             
             if (data.error) {
-                errorDisplay.textContent = "I couldn't understand that calculation. Please try again.";
+                errorDisplay.textContent = "Error: " + data.error;
                 resultDisplay.textContent = 'Error';
                 btnStart.textContent = '⚠ TRY AGAIN';
             } else {
